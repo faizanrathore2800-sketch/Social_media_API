@@ -16,15 +16,17 @@ from app.config import settings
 
 app = FastAPI()
 
-origins = ["https://www.google.com"]
+# Local dev origins for the Streamlit frontend (added when the frontend
+# was introduced - the previous value here, "https://www.google.com",
+# didn't match any real client and looks like a leftover placeholder).
+origins = ["http://localhost:8501", "http://127.0.0.1:8501"]
 
-# Allow all origins (development only — not safe for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins= origins,  # <- allow all origins
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # <- allow all HTTP methods
-    allow_headers=["*"],  # <- allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
